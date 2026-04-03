@@ -1,20 +1,27 @@
-function openCity(evt, cityName) {
-  // Declare all variables
-  var i, tabcontent, tablinks;
+document.addEventListener('DOMContentLoaded', () => {
+  const hoverBlocks = document.querySelectorAll('.custom-hover > div');
 
-  // Get all elements with class="tabcontent" and hide them
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
+  hoverBlocks.forEach(block => {
+    const heading = block.querySelector('h1');
+    const content = block.querySelector('div:last-child');
 
-  // Get all elements with class="tablinks" and remove the class "active"
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
+    // Hide content initially
+    content.style.display = 'none';
 
-  // Show the current tab, and add an "active" class to the link that opened the tab
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
-}
+    // Show content on hover
+    heading.addEventListener('mouseenter', () => {
+      // Hide all other contents
+      hoverBlocks.forEach(b => {
+        const c = b.querySelector('div:last-child');
+        c.style.display = 'none';
+      });
+      // Show current content
+      content.style.display = 'block';
+    });
+
+    // Optional: hide again when mouse leaves heading
+    heading.addEventListener('mouseleave', () => {
+      content.style.display = 'none';
+    });
+  });
+});

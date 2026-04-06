@@ -1,7 +1,14 @@
-.custom-hover > div > div:last-child {
-  display: none;
+.custom-hover > div {
+  display: flex;
+  align-items: flex-start;
 }
 
-.custom-hover > div:hover > div:last-child {
-  display: block;
+.custom-hover > div > div:first-child {
+  flex: 0 0 150px; /* Left small column, adjust width as needed */
+  margin-right: 16px;
+}
+
+.custom-hover > div > div:last-child {
+  flex: 1; /* Right large column */
+  /* display: none; */
 }

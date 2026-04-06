@@ -4,11 +4,12 @@
 }
 
 .custom-hover > div > div:first-child {
-  flex: 0 0 150px; /* Left small column, adjust width as needed */
+  flex: 1; /* Left small column, adjust width as needed */
   margin-right: 16px;
+  cursor: pointer;
 }
 
 .custom-hover > div > div:last-child {
-  flex: 1; /* Right large column */
+  flex: 2; /* Right large column */
   /* display: none; */
 }

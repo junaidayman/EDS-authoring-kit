@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+  console.log('Custom Hover Block Loaded');
   const hoverBlocks = document.querySelectorAll('.custom-hover > div');
 
   hoverBlocks.forEach(block => {

@@ -8,20 +8,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Hide content initially
     content.style.display = 'none';
 
-    // Show content on hover
-    heading.addEventListener('mouseenter', () => {
+    // Toggle content on click
+    heading.addEventListener('click', () => {
       // Hide all other contents
       hoverBlocks.forEach(b => {
         const c = b.querySelector('div:last-child');
-        c.style.display = 'none';
+        if (c !== content) c.style.display = 'none';
       });
-      // Show current content
-      content.style.display = 'block';
-    });
-
-    // Optional: hide again when mouse leaves heading
-    heading.addEventListener('mouseleave', () => {
-      content.style.display = 'none';
+      // Toggle current content
+      content.style.display = (content.style.display === 'block') ? 'none' : 'block';
     });
   });
 });

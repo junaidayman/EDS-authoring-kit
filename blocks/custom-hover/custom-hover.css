@@ -1,15 +1,24 @@
 .custom-hover > div {
   display: flex;
-  align-items: flex-start;
+  gap: 16px;
 }
 
-.custom-hover > div > div:first-child {
-  flex: 1; /* Left small column, adjust width as needed */
-  margin-right: 16px;
+.custom-hover > div > div {
+  &:first-child {
+    flex: 0 0 40%; /* Left small column, adjust width as needed */
+    background-color: #f0f0f0;
+    cursor: pointer;
+    padding: 8px 12px;
+    &:hover {
+      background-color: #e0e0e0;
+    }
+  }
+  & h1 {
+    margin: 0;
+  }
 }
 
 .custom-hover > div > div:last-child {
-  flex: 2; /* Right large column */
-  display: none;
+  flex: calc(60% - 16px); /* Right large column */
 }
 

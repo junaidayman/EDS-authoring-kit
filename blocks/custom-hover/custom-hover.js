@@ -1,23 +1,19 @@
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('Custom Hover Block Loaded');
   const hoverBlocks = document.querySelectorAll('.custom-hover > div');
 
-  hoverBlocks.forEach(block => {
+  hoverBlocks.forEach((block, idx) => {
     const heading = block.querySelector('h1');
     const content = block.querySelector('div:last-child');
 
-    // Hide content initially
-    content.style.display = 'none';
+    // Show content for the first item, hide for others
+    content.style.display = idx === 0 ? 'block' : 'none';
 
     // Toggle content on click
     heading.addEventListener('click', () => {
-      // Hide all other contents
-      hoverBlocks.forEach(b => {
+      hoverBlocks.forEach((b, i) => {
         const c = b.querySelector('div:last-child');
         if (c !== content) c.style.display = 'none';
       });
-      // Toggle current content
       content.style.display = (content.style.display === 'block') ? 'none' : 'block';
     });
+    
   });
-});

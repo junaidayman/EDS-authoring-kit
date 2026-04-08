@@ -1,42 +1,40 @@
-/* Container sizing and background - Softened the dark tone */
-.ticker-wrap {
+/* 1. Main Block Container */
+.stock-ticker.block {
   width: 100%;
   overflow: hidden;
-  background-color: #1a1d23; /* Deep navy-charcoal instead of pure black */
+  background-color: #1a1d23; /* User-friendly deep navy charcoal */
   border-top: 1px solid #2d323e;
   border-bottom: 1px solid #2d323e;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   box-sizing: border-box;
+  padding: 0;
 }
 
-/* The moving track */
-.ticker {
+/* 2. The Moving Track - Uses flex to align items in a row */
+.stock-ticker-track {
   display: flex;
-  white-space: nowrap;
-  animation: ticker 30s linear infinite; /* Slightly slower (30s) is friendlier for reading */
+  width: max-content; /* Critical for seamless looping */
+  animation: ticker-scroll 30s linear infinite;
+  will-change: transform;
 }
 
-/* Pause on hover */
-.ticker:hover {
+/* 3. Interaction - Pause on hover for readability */
+.stock-ticker-track:hover {
   animation-play-state: paused;
   cursor: pointer;
 }
 
-@keyframes ticker {
-  0% { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(-50%, 0, 0); }
-}
-
-/* Individual Stock Cards */
+/* 4. Individual Stock Cards */
 .stock-box {
   display: inline-flex;
   align-items: center;
-  padding: 12px 24px;
-  font-family: 'Inter', -apple-system, sans-serif; /* Modern, readable font */
+  padding: 14px 28px;
+  font-family: 'Inter', -apple-system, sans-serif;
   color: #e6e9ef;
   font-size: 15px;
   font-weight: 500;
-  border-right: 1px solid #2d323e; /* Separators between items */
+  border-right: 1px solid #2d323e;
+  min-width: 220px; /* Ensures consistent spacing */
 }
 
 .stock-symbol {
@@ -48,39 +46,59 @@
 
 .stock-price {
   margin-right: 12px;
-  font-family: 'Roboto Mono', monospace; /* Monospace keeps numbers from jumping */
-  transition: color 0.3s ease;
+  font-family: 'Roboto Mono', monospace; /* Prevents layout jitter during updates */
+  transition: color 0.3s ease, background-color 0.3s ease;
+  padding: 2px 6px;
+  border-radius: 4px;
 }
 
-/* Change Indicator (Refined Green/Red) */
+/* 5. Change Indicator Styles */
 .stock-change {
   font-size: 13px;
   padding: 4px 8px;
   border-radius: 6px;
   font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
-/* Softer semantic colors for better accessibility */
-.up { 
+.stock-change.up { 
   color: #4ade80; 
-  background: rgba(74, 222, 128, 0.15); 
+  background: rgba(74, 222, 128, 0.12); 
 }
 
-.down { 
+.stock-change.down { 
   color: #fb7185; 
-  background: rgba(251, 113, 133, 0.15); 
+  background: rgba(251, 113, 133, 0.12); 
 }
 
-/* Real-Time Update Flash Animations - Gentle Glow */
+/* 6. Live Update Animations (Flash Effects) */
 .flash-green { animation: flashGreen 0.8s ease-out; }
 .flash-red { animation: flashRed 0.8s ease-out; }
 
 @keyframes flashGreen {
-  0% { background-color: rgba(74, 222, 128, 0.3); color: #fff; }
+  0% { background-color: rgba(74, 222, 128, 0.4); color: #fff; }
   100% { background-color: transparent; }
 }
 
 @keyframes flashRed {
-  0% { background-color: rgba(251, 113, 133, 0.3); color: #fff; }
+  0% { background-color: rgba(251, 113, 133, 0.4); color: #fff; }
   100% { background-color: transparent; }
+}
+
+/* 7. Infinite Scroll Keyframes */
+@keyframes ticker-scroll {
+  0% { transform: translate3d(0, 0, 0); }
+  /* Since we duplicate the list in JS, moving -50% creates the loop */
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+/* 8. Mobile Optimization */
+@media (max-width: 600px) {
+  .stock-box {
+    padding: 10px 18px;
+    font-size: 14px;
+    min-width: 180px;
+  }
 }

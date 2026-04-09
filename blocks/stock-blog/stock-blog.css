@@ -1,0 +1,113 @@
+/* 1. Outer Section Container */
+.section.stock-blog-container {
+  padding: 0;
+  margin: 0;
+  background-color: #1a1d23; /* Professional navy-charcoal */
+  overflow: hidden;
+}
+
+/* 2. Wrapper for the Block */
+.stock-blog-wrapper {
+  width: 100%;
+  border-top: 1px solid #2d323e;
+  border-bottom: 1px solid #2d323e;
+  background-color: #1a1d23;
+  display: flex;
+}
+
+/* 3. The Block (Acting as the Animated Track) */
+.stock-blog.track.block {
+  display: flex;
+  white-space: nowrap;
+  width: max-content;
+  /* 30s duration for a smooth, readable speed */
+  animation: blog-ticker-scroll 30s linear infinite;
+  will-change: transform;
+}
+
+/* Pause animation on hover */
+.stock-blog.track.block:hover {
+  animation-play-state: paused;
+  cursor: pointer;
+}
+
+/* 4. Individual Stock Cards */
+.stock-box {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 28px;
+  font-family: 'Inter', -apple-system, sans-serif;
+  color: #e6e9ef;
+  font-size: 15px;
+  font-weight: 500;
+  border-right: 1px solid #2d323e;
+  min-width: 220px;
+}
+
+.stock-symbol {
+  margin-right: 12px;
+  color: #94a3b8; /* Muted slate for ticker names */
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.stock-price {
+  font-family: 'Roboto Mono', monospace; /* Prevents text jumping */
+  margin-right: 8px;
+  color: #ffffff;
+}
+
+/* 5. Trend/Change Indicators */
+.stock-change {
+  font-size: 13px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.stock-change.up { 
+  color: #4ade80; 
+  background: rgba(74, 222, 128, 0.12); 
+}
+
+.stock-change.down { 
+  color: #fb7185; 
+  background: rgba(251, 113, 133, 0.12); 
+}
+
+/* 6. Live Update "Flash" Glows */
+.flash-green { animation: flashGreenGlow 0.8s ease-out; }
+.flash-red { animation: flashRedGlow 0.8s ease-out; }
+
+@keyframes flashGreenGlow {
+  0% { color: #4ade80; text-shadow: 0 0 10px rgba(74, 222, 128, 0.8); }
+  100% { color: inherit; text-shadow: none; }
+}
+
+@keyframes flashRedGlow {
+  0% { color: #fb7185; text-shadow: 0 0 10px rgba(251, 113, 133, 0.8); }
+  100% { color: inherit; text-shadow: none; }
+}
+
+/* 7. Infinite Horizontal Scroll Animation */
+@keyframes blog-ticker-scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    /* Moves exactly half width because content is duplicated in the HTML */
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* 8. Responsiveness */
+@media (max-width: 768px) {
+  .stock-box {
+    padding: 10px 18px;
+    min-width: 180px;
+    font-size: 14px;
+  }
+}
